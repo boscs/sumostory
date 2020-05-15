@@ -32,6 +32,8 @@ jobs:
         rm -rf __sapper__
         ls -la
         git add .
+        git config user.email "main.action@github.com"
+        git config user.name "CD Bot"
         git commit -m "autocommit gh-pages"
         git push
     - name: Publish to GitHub Pages
