@@ -35,15 +35,15 @@ jobs:
         git config user.email "main.action@github.com"
         git config user.name "CD Bot"
         git commit -m "autocommit gh-pages"
-        git push
-    - name: Publish to GitHub Pages
-      uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
-      with:
-        # The name of the directory that containing the content to be published
-        #dir:  # optional, default is ./
-        # The name of the remote branch that publishing source for GitHub Pages site
-        branch: gh-pages
-        # The remote repository that publishing source for GitHub Pages site, defaults to current repo and is formatted like 'user/repo-name'
-        #repo: # optional
-        # The personal access token that authorize repo access
-        token: ${{github.token}}
+        git push --set-upstream origin gh-pages
+    # - name: Publish to GitHub Pages
+    #   uses: tsunematsu21/actions-publish-gh-pages@v1.0.1
+    #   with:
+    #     # The name of the directory that containing the content to be published
+    #     #dir:  # optional, default is ./
+    #     # The name of the remote branch that publishing source for GitHub Pages site
+    #     branch: gh-pages
+    #     # The remote repository that publishing source for GitHub Pages site, defaults to current repo and is formatted like 'user/repo-name'
+    #     #repo: # optional
+    #     # The personal access token that authorize repo access
+    #     token: ${{github.token}}
