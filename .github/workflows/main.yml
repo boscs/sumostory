@@ -26,8 +26,9 @@ jobs:
     #     branches: gh-pages # Branches to delete (comma separated)
     - name: copy to root dir
       run: |
-        git branch --set-upstream-to=origin/gh-pages
-        git pull
+        git config user.email "main.action@github.com"
+        git config user.name "CD Bot"
+        git push -d origin gh-pages
         git checkout -b gh-pages
         shopt -s extglob
         rm -rf !(__sapper__|.git|.gitignore|.|..)
@@ -35,8 +36,6 @@ jobs:
         rm -rf __sapper__
         ls -la
         git add .
-        git config user.email "main.action@github.com"
-        git config user.name "CD Bot"
         git commit -m "autocommit gh-pages"
         git push --set-upstream origin gh-pages
     # - name: Publish to GitHub Pages
