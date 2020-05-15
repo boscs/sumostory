@@ -26,8 +26,9 @@ jobs:
     #     branches: gh-pages # Branches to delete (comma separated)
     - name: copy to root dir
       run: |
-        git checkout -b gh-pages
+        git branch --set-upstream-to=origin/gh-pages
         git pull
+        git checkout -b gh-pages
         shopt -s extglob
         rm -rf !(__sapper__|.git|.gitignore|.|..)
         cp -r ./__sapper__/export/* .
