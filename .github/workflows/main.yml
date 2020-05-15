@@ -27,7 +27,7 @@ jobs:
       run: |
         git checkout -b gh-pages
         shopt -s extglob
-        rm -rf !(__sapper__|.git|.gitignore)
+        rm -rf !(__sapper__|.git|.gitignore|.|..)
         cp -r ./__sapper__/export/* .
         rm -rf __sapper__
         ls -la
