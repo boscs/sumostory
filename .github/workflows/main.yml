@@ -18,7 +18,8 @@ jobs:
     - name: Use Node.js 12.x
       run: |
         npm install
-        npm run export
+        npm install now
+        npx sapper export
     # - name: Delete multiple branches
     #   uses: dawidd6/action-delete-branch@v3.0.0
     #   with:
