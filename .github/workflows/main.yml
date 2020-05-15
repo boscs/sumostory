@@ -27,6 +27,7 @@ jobs:
     - name: copy to root dir
       run: |
         git checkout -b gh-pages
+        git pull
         shopt -s extglob
         rm -rf !(__sapper__|.git|.gitignore|.|..)
         cp -r ./__sapper__/export/* .
