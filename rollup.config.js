@@ -2,17 +2,15 @@ import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import commonjs from '@rollup/plugin-commonjs';
 import svelte from 'rollup-plugin-svelte';
-import babel from 'rollup-plugin-babel';
-import {
-	terser
-} from 'rollup-plugin-terser';
+import babel from '@rollup/plugin-babel';
+import { terser } from 'rollup-plugin-terser';
 import config from 'sapper/config/rollup.js';
 import pkg from './package.json';
+//import smelte from "smelte/rollup-plugin-smelte";
 
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
-const smelte = require("smelte/rollup-plugin-smelte");
 
 const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
 
@@ -30,15 +28,16 @@ export default {
 				hydratable: true,
 				emitCss: true
 			}),
+			//!dev && smelte,
+			//smelte(),
 			resolve({
 				browser: true,
 				dedupe: ['svelte']
 			}),
 			commonjs(),
-
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
-				runtimeHelpers: true,
+				babelHelpers: 'runtime',
 				exclude: ['node_modules/@babel/**'],
 				presets: [
 					['@babel/preset-env', {
@@ -55,32 +54,10 @@ export default {
 
 			!dev && terser({
 				module: true
-			}),
-			smelte({
-				purge: !dev,
-				output: "public/globalMaterial.css", // it defaults to static/global.css which is probably what you expect in Sapper 
-				postcss: [], // Your PostCSS plugins
-				whitelist: [], // Array of classnames whitelisted from purging
-				whitelistPatterns: [], // Same as above, but list of regexes
-				tailwind: {
-					colors: {
-						primary: "#e63800",
-						secondary: "#009688",
-						error: "#f44336",
-						success: "#4caf50",
-						alert: "#ff9800",
-						blue: "#2196f3",
-						dark: "#212121"
-					}, // Object of colors to generate a palette from, and then all the utility classes
-					darkMode: false,
-				},
-				// Any other props will be applied on top of default Smelte tailwind.config.js
-			}),
-
-
-
+			})
 		],
 
+		preserveEntrySignatures: false,
 		onwarn,
 	},
 
@@ -96,6 +73,7 @@ export default {
 				generate: 'ssr',
 				dev
 			}),
+			// smelte(),
 			resolve({
 				dedupe: ['svelte']
 			}),
@@ -105,6 +83,7 @@ export default {
 			require('module').builtinModules || Object.keys(process.binding('natives'))
 		),
 
+		preserveEntrySignatures: 'strict',
 		onwarn,
 	},
 
@@ -121,6 +100,7 @@ export default {
 			!dev && terser()
 		],
 
+		preserveEntrySignatures: false,
 		onwarn,
 	}
 };

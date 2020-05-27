@@ -1,9 +1,16 @@
+<script>
+	import WrenchTitle from '../components/WrenchTitle/WrenchTitle.svelte';
+</script>
 <style>
-	h1, figure, p {
+	.WrenchTitle, h1, figure, p {
 		text-align: center;
 		margin: 0 auto;
 	}
-
+	.WrenchTitle{
+		display: block;
+		margin: auto;
+		margin-bottom: 0.5em;
+	}
 	h1 {
 		font-size: 2.8em;
 		text-transform: uppercase;
@@ -36,7 +43,8 @@
 	<title>Sapper project template</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<WrenchTitle class="WrenchTitle" titleHat="titleHat" fontSize="2.8"  subTitle="subTitle">Great success!</WrenchTitle>
+
 
 <figure>
 	<img alt='Success Kid' src='successkid.jpg'>

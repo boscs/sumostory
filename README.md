@@ -1,9 +1,3 @@
-
-# sumostory
-
-a sapper app to educate and allow newcomer to explore a fablab
-
-
 # sapper-template
 
 The default [Sapper](https://github.com/sveltejs/sapper) template, available for Rollup and webpack.
